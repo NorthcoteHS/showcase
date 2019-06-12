@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Menu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -28,6 +28,10 @@
         */
         color: rgb(4, 54, 115);
       }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
     </style>
   </head>
 
@@ -41,27 +45,31 @@
       </div>
       <div class="card-body">
         <h5 class="card-subtitle">2019 Semester 1</h5>
-        <p class="card-text" style="text-align: left;">Welcome to our showcase of NHS Computing projects. Please choose a student's name to view their final project.</p>
+        <p class="card-text">
+          Welcome to our showcase of NHS Computing projects.
+          Please choose a class and student's name to view their final project.
+        </p>
       </div>
     </div>
-    <!--
-    <h1 class="text-primary">NHS Computing</h1>
-    <h2 class="text-secondary">Festival of Thinking</h2>
 
-    <p class="mt-4">Welcome to our showcase of NHS Computing projects. Please choose a student's name to view their final project.</p>
-  -->
-
-    <h6 class="mt-4">10DWEB.A4</h6>
-    <div class="list-group">
-      <a href="10dweba4/john" target="_blank" class="list-group-item list-group-item-action">John</a>
-      <a href="10dweba4/paul" target="_blank" class="list-group-item list-group-item-action">Paul</a>
+    <a href="#dweba4" data-toggle="collapse">
+      <h6 class="mt-4">10DWEB.A4</h6>
+    </a>
+    <div class="collapse" id="dweba4">
+      <div class="list-group">
+        <a href="10dweba4/john" target="_blank" class="list-group-item list-group-item-action">John</a>
+        <a href="10dweba4/paul" target="_blank" class="list-group-item list-group-item-action">Paul</a>
+      </div>
     </div>
 
     <h6 class="mt-4">10DPRO.A2</h6>
 
     <h6 class="mt-4">10DPRO.C1</h6>
 
-
+    <!-- Bootstrap. -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script>
     </script>
