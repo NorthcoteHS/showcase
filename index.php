@@ -1,7 +1,47 @@
 <!DOCTYPE html>
+
+<?php
+// Setup variables.
+$servername = "localhost";
+$username = "showcase";
+$password = "showcase";
+$dbname = "showcase";
+$table = "students";
+
+// Create connection.
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection.
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+function query($sql) {
+  // Query SQL.
+  global $conn;
+  $result = $conn->query($sql);
+
+  if (!$result) {
+    die("Query failed: " . $conn->error);
+  }
+
+  // Parse the results.
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $array[] = $row;
+    }
+  }
+
+  // Return the array.
+  return $array;
+}
+
+// $students = query("SELECT * FROM $table");
+?>
+
 <html>
   <head>
-    <title>Menu</title>
+    <title>Festival of Thinking</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
 
@@ -52,19 +92,36 @@
       </div>
     </div>
 
-    <a href="#dweba4" data-toggle="collapse">
-      <h6 class="mt-4">10DWEB.A4</h6>
-    </a>
-    <div class="collapse" id="dweba4">
-      <div class="list-group">
-        <a href="10dweba4/john" target="_blank" class="list-group-item list-group-item-action">John</a>
-        <a href="10dweba4/paul" target="_blank" class="list-group-item list-group-item-action">Paul</a>
-      </div>
-    </div>
+    <?php
+    $classes = query("SELECT DISTINCT class FROM $table");
+    foreach ($classes as $classObj) {
+      $classID = $classObj['class'];
+      $class = "10$classID";
 
-    <h6 class="mt-4">10DPRO.A2</h6>
+      // Open the class div.
+      echo '
+        <a href="#' . $classID . '" data-toggle="collapse">
+          <h6 class="mt-4">' . $class . '</h6>
+        </a>
+        <div class="collapse" id="' . $classID . '">
+          <div class="list-group">';
 
-    <h6 class="mt-4">10DPRO.C1</h6>
+      // Loop through each student.
+      $students = query("SELECT * FROM $table WHERE class='$classID'");
+      foreach ($students as $student) {
+        // Display student link.
+        echo '
+            <a href="student.php?class=' . $class . '&code=' . $student['code'] .'" target="_blank" class="list-group-item list-group-item-action">
+              ' . $student['firstName'] . ' ' . $student['lastName'] . '
+            </a>';
+      }
+
+      // Close off the div.
+      echo '
+          </div>
+        </div>';
+    }
+    ?>
 
     <!-- Bootstrap. -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -75,3 +132,8 @@
     </script>
   </body>
 </html>
+
+<?php
+// Close the SQL connection.
+$conn->close();
+?>
