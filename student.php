@@ -111,6 +111,20 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
         </div>
       </div>
 
+      <h3>Final Project</h3>
+      <p style="text-align: center">
+        <a href="<?php echo "$studentDir/" ?>">
+          View the final project (CAT 3) here
+        </a>
+      </p>
+
+      <h3>App Inventor</h3>
+      <p style="text-align: center">
+        <a href="<?php echo "$studentDir/$code.apk" ?>">
+          Download .apk (For Android phones only)
+        </a>
+      </p>
+
       <?php
       $imgs = glob("$studentDir/*.jpg");
 
