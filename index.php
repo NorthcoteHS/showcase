@@ -61,67 +61,71 @@ function query($sql) {
         background-color: rgb(79, 42, 131);
         color: white;
       }
-      body, .list-group-item {
-        /*
+      html, body {
         background-color: rgb(214, 193, 82);
-        color: white;
-        */
         color: rgb(4, 54, 115);
+        height: 100%;
       }
       a {
         color: inherit;
         text-decoration: inherit;
       }
+      #main {
+        background-color: white;
+        min-height: 100%;
+      }
     </style>
   </head>
 
   <body>
-    <div class="card">
-      <div class="card-header" style="text-align:center">
-        <h2>
-          NHS Computing
-          <small class="text"> Festival of Thinking</small>
-        </h2>
+    <div id="main" class="container">
+      <div class="card">
+        <div class="card-header" style="text-align:center">
+          <h2>
+            NHS Computing
+            <small class="text"> Festival of Thinking</small>
+          </h2>
+        </div>
+        <div class="card-body">
+          <h5 class="card-subtitle">2019 Semester 1</h5>
+          <p class="card-text">
+            Welcome to our showcase of NHS Computing projects.
+            Please choose a class and student's name to view their final project.
+          </p>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-subtitle">2019 Semester 1</h5>
-        <p class="card-text">
-          Welcome to our showcase of NHS Computing projects.
-          Please choose a class and student's name to view their final project.
-        </p>
-      </div>
-    </div>
 
-    <?php
-    $classes = query("SELECT DISTINCT class FROM $table");
-    foreach ($classes as $classObj) {
-      $classID = $classObj['class'];
-      $class = "10$classID";
+      <?php
+      $classes = query("SELECT DISTINCT class FROM $table");
+      foreach ($classes as $classObj) {
+        $classID = $classObj['class'];
+        $class = "10$classID";
 
-      // Open the class div.
-      echo '
-        <a href="#' . $classID . '" data-toggle="collapse">
-          <h6 class="mt-4">' . $class . '</h6>
-        </a>
-        <div class="collapse" id="' . $classID . '">
-          <div class="list-group">';
-
-      // Loop through each student.
-      $students = query("SELECT * FROM $table WHERE class='$classID'");
-      foreach ($students as $student) {
-        // Display student link.
+        // Open the class div.
         echo '
-            <a href="student.php?class=' . $class . '&code=' . $student['code'] .'" target="_blank" class="list-group-item list-group-item-action">
-              ' . $student['firstName'] . ' ' . $student['lastName'] . '
-            </a>';
-      }
+          <a href="#' . $classID . '" data-toggle="collapse">
+            <h6 class="mt-4">' . $class . '</h6>
+          </a>
+          <div class="collapse" id="' . $classID . '">
+            <div class="list-group">';
 
-      // Close off the div.
-      echo '
-          </div>
-        </div>';
-    }
-    ?>
+        // Loop through each student.
+        $students = query("SELECT * FROM $table WHERE class='$classID'");
+        foreach ($students as $student) {
+          // Display student link.
+          echo '
+              <a href="student.php?class=' . $class . '&code=' . $student['code'] .'" target="_blank" class="list-group-item list-group-item-action">
+                ' . $student['firstName'] . ' ' . $student['lastName'] . '
+              </a>';
+        }
+
+        // Close off the div.
+        echo '
+            </div>
+          </div>';
+      }
+      ?>
+    </div>
 
     <!-- Bootstrap. -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -68,84 +68,88 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
         background-color: rgb(79, 42, 131);
         color: white;
       }
-      body, .list-group-item {
-        /*
+      html, body {
         background-color: rgb(214, 193, 82);
-        color: white;
-        */
         color: rgb(4, 54, 115);
+        height: 100%;
       }
       a {
         color: inherit;
         text-decoration: inherit;
       }
+      #main {
+        background-color: white;
+        min-height: 100%;
+      }
     </style>
   </head>
 
   <body>
-    <div class="card">
-      <div class="card-header" style="text-align:center">
-        <h2>
-          NHS Computing
-          <small class="text"> Festival of Thinking</small>
-        </h2>
+    <div id="main" class="container">
+      <div class="card">
+        <div class="card-header" style="text-align:center">
+          <h2>
+            NHS Computing
+            <small class="text"> Festival of Thinking</small>
+          </h2>
+        </div>
+        <div class="card-body">
+          <h5 class="card-subtitle">2019 Semester 1</h5>
+          <p class="card-text">
+            <?php
+            echo "$class: $studentName";
+            ?>
+          </p>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-subtitle">2019 Semester 1</h5>
-        <p class="card-text">
-          <?php
-          echo "$class: $studentName";
-          ?>
-        </p>
-      </div>
+
+      <?php
+      $imgs = glob("$studentDir/*.jpg");
+
+      if ($imgs) {
+        // Start the carousel.
+        echo '
+          <div id="carousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">';
+
+        // Build indicators.
+        $firstImg = ' class="active"';
+        foreach ($imgs as $i=>$img) {
+          echo '
+              <li data-target="#carousel" data-slide-to="' . $i . '"' . $firstImg . '></li>';
+          $firstImg = '';
+        }
+
+        // Continue the carousel.
+        echo '
+            </ol>
+            <div class="carousel-inner">';
+
+        // Build individual images.
+        $firstImg = ' active';
+        foreach ($imgs as $i=>$img) {
+          echo '
+              <div class="carousel-item' . $firstImg . '">
+                <img class="d-block w-100" src="' . $img . '" alt="Slide ' . $i . '">
+              </div>';
+          $firstImg = '';
+        }
+
+        // Finish the carousel.
+        echo '
+            </div>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>';
+      }
+      ?>
     </div>
-
-    <?php
-    $imgs = glob("$studentDir/*.jpg");
-
-    if ($imgs) {
-      // Start the carousel.
-      echo '
-        <div id="carousel" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">';
-
-      // Build indicators.
-      $firstImg = ' class="active"';
-      foreach ($imgs as $i=>$img) {
-        echo '
-            <li data-target="#carousel" data-slide-to="' . $i . '"' . $firstImg . '></li>';
-        $firstImg = '';
-      }
-
-      // Continue the carousel.
-      echo '
-          </ol>
-          <div class="carousel-inner">';
-
-      // Build individual images.
-      $firstImg = ' active';
-      foreach ($imgs as $i=>$img) {
-        echo '
-            <div class="carousel-item' . $firstImg . '">
-              <img class="d-block w-100" src="' . $img . '" alt="Slide ' . $i . '">
-            </div>';
-        $firstImg = '';
-      }
-
-      // Finish the carousel.
-      echo '
-          </div>
-          <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>';
-    }
-    ?>
 
     <!-- Bootstrap. -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
