@@ -55,11 +55,6 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style type="text/css">
-      /*
-      h1, h2 {
-        text-align: center;
-      }
-      */
       .card-header {
         background-color: rgb(4, 54, 115);
         color: white;
@@ -77,10 +72,23 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
         color: inherit;
         text-decoration: inherit;
       }
+      h3 {
+        text-align: center;
+      }
       #main {
         background-color: white;
         min-height: 100%;
       }
+      #carousel {
+        width: 480px;
+        margin: 0 auto;
+      }
+    .carousel-control-prev-icon {
+     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23222' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+    }
+    .carousel-control-next-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23222' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+    }
     </style>
   </head>
 
@@ -109,7 +117,8 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
       if ($imgs) {
         // Start the carousel.
         echo '
-          <div id="carousel" class="carousel slide" data-ride="carousel">
+          <h3>Design Booklet Highlights</h3>
+          <div id="carousel" class="carousel slide border" data-ride="carousel">
             <ol class="carousel-indicators">';
 
         // Build indicators.
