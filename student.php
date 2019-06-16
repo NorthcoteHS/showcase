@@ -2,6 +2,9 @@
 
 <?php
 // Get variables sent by GET.
+if (!isset($_GET['class']) || !isset($_GET['code'])) {
+  die('Invalid class and/or code.');
+}
 $class = $_GET['class'];
 $classID = substr($class, 2);
 $code = $_GET['code'];
