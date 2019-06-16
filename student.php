@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<?php
+// Get variables sent by GET.
+$class = $_GET['class'];
+$classID = substr($class, 2);
+$code = $_GET['code'];
+$studentDir = "$class/$code";
+
+// Setup variables.
+$servername = "localhost";
+$username = "showcase";
+$password = "showcase";
+$dbname = "showcase";
+$table = "students";
+
+// Create connection.
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection.
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+function query($sql) {
+  // Query SQL.
+  global $conn;
+  $result = $conn->query($sql);
+
+  if (!$result) {
+    die("Query failed: " . $conn->error);
+  }
+
+  // Parse the results.
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $array[] = $row;
+    }
+  }
+
+  // Return the array.
+  return $array;
+}
+
+$student = query("SELECT * FROM $table WHERE class='$classID' AND code='$code'")[0];
+$studentName = $student['firstName'] . ' ' . $student['lastName'];
+?>
+
+<html>
+  <head>
+    <title>Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+      /*
+      h1, h2 {
+        text-align: center;
+      }
+      */
+      .card-header {
+        background-color: rgb(4, 54, 115);
+        color: white;
+      }
+      .card-body {
+        background-color: rgb(79, 42, 131);
+        color: white;
+      }
+      body, .list-group-item {
+        /*
+        background-color: rgb(214, 193, 82);
+        color: white;
+        */
+        color: rgb(4, 54, 115);
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="card-header" style="text-align:center">
+        <h2>
+          NHS Computing
+          <small class="text"> Festival of Thinking</small>
+        </h2>
+      </div>
+      <div class="card-body">
+        <h5 class="card-subtitle">2019 Semester 1</h5>
+        <p class="card-text">
+          <?php
+          echo "$class: $studentName";
+          ?>
+        </p>
+      </div>
+    </div>
+
+    <?php
+    $imgs = glob("$studentDir/*.jpg");
+
+    if ($imgs) {
+      // Start the carousel.
+      echo '
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">';
+
+      // Build indicators.
+      $firstImg = ' class="active"';
+      foreach ($imgs as $i=>$img) {
+        echo '
+            <li data-target="#carousel" data-slide-to="' . $i . '"' . $firstImg . '></li>';
+        $firstImg = '';
+      }
+
+      // Continue the carousel.
+      echo '
+          </ol>
+          <div class="carousel-inner">';
+
+      // Build individual images.
+      $firstImg = ' active';
+      foreach ($imgs as $i=>$img) {
+        echo '
+            <div class="carousel-item' . $firstImg . '">
+              <img class="d-block w-100" src="' . $img . '" alt="Slide ' . $i . '">
+            </div>';
+        $firstImg = '';
+      }
+
+      // Finish the carousel.
+      echo '
+          </div>
+          <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>';
+    }
+    ?>
+
+    <!-- Bootstrap. -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+    </script>
+  </body>
+</html>
+
+<?php
+// Close the SQL connection.
+$conn->close();
+?>
