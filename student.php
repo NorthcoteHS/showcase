@@ -79,16 +79,12 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
         background-color: white;
         min-height: 100%;
       }
-      #carousel {
-        width: 480px;
-        margin: 0 auto;
+      .carousel-control-prev-icon {
+       background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23222' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
       }
-    .carousel-control-prev-icon {
-     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23222' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
-    }
-    .carousel-control-next-icon {
-      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23222' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
-    }
+      .carousel-control-next-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23222' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+      }
     </style>
   </head>
 
@@ -132,6 +128,8 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
         // Start the carousel.
         echo '
           <h3>Design Booklet Highlights</h3>
+          <div class="row justify-content-center">
+          <div class="col-md-6">
           <div id="carousel" class="carousel slide border" data-ride="carousel">
             <ol class="carousel-indicators">';
 
@@ -169,7 +167,8 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
-          </div>';
+          </div>
+          </div></div>';
       }
       ?>
     </div>
