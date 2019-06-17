@@ -112,17 +112,30 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
 
       <h3>Final Project</h3>
       <p style="text-align: center">
-        <a href="<?php echo "$studentDir/" ?>">
-          View the final project (CAT 3) here
-        </a>
+        <?php
+        if (file_exists("$studentDir/index.html")) {
+          echo '
+            <a href="' . $studentDir . '/">
+              View the final project (CAT 3) here
+            </a>';
+        } else {
+          echo 'Sorry, no submission was found.';
+        }
+        ?>
       </p>
 
-      <h3>App Inventor</h3>
-      <p style="text-align: center">
-        <a href="<?php echo "$studentDir/$code.apk" ?>" download>
-          Download .apk (For Android phones only)
-        </a>
-      </p>
+      <?php
+      $appFile = "$studentDir/$code.apk";
+      if (file_exists($appFile)) {
+        echo '
+          <h3>App Inventor</h3>
+          <p style="text-align: center">
+            <a href="' . $appFile . '" download>
+              Download .apk (For Android phones only)
+            </a>
+          </p>';
+      }
+      ?>
 
       <?php
       $imgs = glob("$studentDir/*.jpg");
