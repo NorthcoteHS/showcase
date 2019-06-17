@@ -119,7 +119,7 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
 
       <h3>App Inventor</h3>
       <p style="text-align: center">
-        <a href="<?php echo "$studentDir/$code.apk" ?>">
+        <a href="<?php echo "$studentDir/$code.apk" ?>" download>
           Download .apk (For Android phones only)
         </a>
       </p>

@@ -114,7 +114,7 @@ function query($sql) {
         foreach ($students as $student) {
           // Display student link.
           echo '
-              <a href="student.php?class=' . $class . '&code=' . $student['code'] .'" target="_blank" class="list-group-item list-group-item-action">
+              <a href="student.php?class=' . $class . '&code=' . $student['code'] .'" class="list-group-item list-group-item-action">
                 ' . $student['firstName'] . ' ' . $student['lastName'] . '
               </a>';
         }
