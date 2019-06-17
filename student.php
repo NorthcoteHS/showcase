@@ -138,14 +138,14 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
       ?>
 
       <?php
-      $imgs = glob("$studentDir/*.jpg");
+      $imgs = glob("$studentDir/*.{jpg,jpeg,png}", GLOB_BRACE);
 
       if ($imgs) {
         // Start the carousel.
         echo '
           <h3>Design Booklet Highlights</h3>
           <div class="row justify-content-center">
-          <div class="col-md-6">
+          <div class="col-md-10">
           <div id="carousel" class="carousel slide border" data-ride="carousel">
             <ol class="carousel-indicators">';
 
