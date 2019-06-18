@@ -140,9 +140,9 @@ function query($sql) {
 
       function random() {
         var student = students[Math.floor(Math.random() * students.length)];
-        window.location.href = 'student.php?class=10{class}&code={code}'
+        var url = 'student.php?class=10{class}&code={code}'
           .replace('{class}', student.class).replace('{code}', student.code);
-        console.log(student);
+        window.open(url, '_blank');
       }
     </script>
   </body>
