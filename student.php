@@ -114,7 +114,13 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
       <h3>Final Project</h3>
       <p style="text-align: center">
         <?php
-        if (file_exists("$studentDir/index.html")) {
+        $trinket = $student['trinket'];
+        if ($trinket) {
+          echo '
+            <a href="python.php?trinket=' . $trinket . '">
+              View the final project (CAT 3) here
+            </a>';
+        } else if (file_exists("$studentDir/index.html")) {
           echo '
             <a href="' . $studentDir . '/">
               View the final project (CAT 3) here

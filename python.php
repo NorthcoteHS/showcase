@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+
+<?php
+if (!isset($_GET['trinket'])) {
+  die('Invalid trinket ID.');
+}
+?>
+
 <html>
   <head>
     <title>Festival of Thinking - Python</title>
@@ -17,7 +24,7 @@
     -->
 
     <!-- Note: Each project will have to be loaded individually onto Trinket.io... -->
-    <iframe src="https://trinket.io/embed/python/4734ca9382?toggleCode=true&runOption=run&start=result"
+    <iframe src="https://trinket.io/embed/python/<?php echo $_GET['trinket'] ?>?toggleCode=true&runOption=run&start=result"
             width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen>
     </iframe>
 
