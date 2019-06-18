@@ -132,12 +132,12 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
       </p>
 
       <?php
-      $appFile = "$studentDir/$code.apk";
-      if (file_exists($appFile)) {
+      $appFile = glob("$studentDir/*.apk");
+      if ($appFile) {
         echo '
           <h3>App Inventor</h3>
           <p style="text-align: center">
-            <a href="' . $appFile . '" download>
+            <a href="' . $appFile[0] . '" download>
               Download .apk (For Android phones only)
             </a>
           </p>';
