@@ -96,6 +96,8 @@ function query($sql) {
         </div>
       </div>
 
+      <button type="button" class="btn btn-primary" onclick="random()">View random student!</button>
+
       <?php
       $classes = query("SELECT DISTINCT class FROM $table");
       foreach ($classes as $classObj) {
@@ -134,6 +136,14 @@ function query($sql) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script>
+      var students = <?php echo json_encode(query("SELECT * FROM $table")); ?>;
+
+      function random() {
+        var student = students[Math.floor(Math.random() * students.length)];
+        window.location.href = 'student.php?class=10{class}&code={code}'
+          .replace('{class}', student.class).replace('{code}', student.code);
+        console.log(student);
+      }
     </script>
   </body>
 </html>
