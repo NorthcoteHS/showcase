@@ -22,18 +22,26 @@ function query($sql) {
   $result = $conn->query($sql);
 
   if (!$result) {
+    // Handle errors.
     die("Query failed: " . $conn->error);
   }
+  else if (is_object($result)) {
+    // Initialise an empty array.
+    $array = [];
 
-  // Parse the results.
-  if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-      $array[] = $row;
+    // Parse the results.
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $array[] = $row;
+      }
     }
+
+    // Return the array.
+    return $array;
   }
 
-  // Return the array.
-  return $array;
+  // Return the numeric result (e.g. for INSERT/UPDATE).
+  return $result;
 }
 
 // $students = query("SELECT * FROM $table");
