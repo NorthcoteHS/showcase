@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
 <?php
+require 'db.php';
+
 // Get variables sent by GET.
 if (!isset($_GET['class']) || !isset($_GET['code'])) {
   die('Invalid class and/or code.');
@@ -9,41 +11,6 @@ $class = $_GET['class'];
 $classID = substr($class, 2);
 $code = $_GET['code'];
 $studentDir = "$class/$code";
-
-// Setup variables.
-$servername = "localhost";
-$username = "showcase";
-$password = "showcase";
-$dbname = "showcase";
-$table = "students";
-
-// Create connection.
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection.
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
-function query($sql) {
-  // Query SQL.
-  global $conn;
-  $result = $conn->query($sql);
-
-  if (!$result) {
-    die("Query failed: " . $conn->error);
-  }
-
-  // Parse the results.
-  if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-      $array[] = $row;
-    }
-  }
-
-  // Return the array.
-  return $array;
-}
 
 $student = query("SELECT * FROM $table WHERE class='$classID' AND code='$code'")[0];
 $studentName = $student['firstName'] . ' ' . $student['lastName'];
