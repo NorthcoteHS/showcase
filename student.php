@@ -87,6 +87,11 @@ $studentName = $student['firstName'] . ' ' . $student['lastName'];
             <a href="python.php?trinket=' . $trinket . '">
               View the final project (CAT 3) here
             </a>';
+        } else if (file_exists("$studentDir/improved.html")) {
+          echo '
+            <a href="' . $studentDir . '/improved.html">
+              View the final project (CAT 3) here
+            </a>';
         } else if (file_exists("$studentDir/index.html")) {
           echo '
             <a href="' . $studentDir . '/">
